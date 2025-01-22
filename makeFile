@@ -1,0 +1,12 @@
+.PHONY: all clean
+
+all: lib app
+
+app:  ./app/main.cpp 
+	g++ ./app/main.cpp -lSharedLib -o ./App -L. -std=c++17 -Wl,-rpath '-Wl,$$ORIGIN/'
+
+lib: ./lib/lib.cpp ./lib/lib.h
+	g++ -shared -o ./libSharedLib.so -fPIC ./lib/lib.cpp ./lib/lib.h -std=c++17
+
+clean:
+
